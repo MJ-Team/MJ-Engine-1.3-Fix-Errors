@@ -1,0 +1,41 @@
+Import:mj {
+   Lock:false
+   EditFilesNames:false
+   MinjavaEditCodes:false
+   fixerrors:true
+   debug:true
+   filescreator:import
+   fastrun:import
+}
+
+script(mj.load) {
+   
+   if load files is Nothing {(
+      debug.cancel();
+      debug.Err("Error, Cant Fix MJ Engine 1.3 Files, Errors : ", .GetErr);
+   ) else {
+      fast.("fix")run
+   }}
+   
+fast.("fix")notrun _ all under
+   
+   <-- This is the codes'll fix Minjava Engine 1.3 ! -->
+   
+   debug.Nit("Fixing Errors...");
+   fix.GetFile("/System\*");
+   file.new("debug.mj", name="debugfile", hide);
+   debugfile.GetText = debug.Get {
+      .GetText
+      .GetErr
+      .GetNit
+      .GetWor
+      .GetAllOptions
+      .text.mj.newline
+      .text="debug"
+   }
+   file.load("/System\*");
+   file.fix(loaded files);
+   file.deleteAll("/System\*");
+   file.make("/System\*");
+   debug.Nit("fix Done!")
+}
